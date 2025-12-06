@@ -22,6 +22,14 @@ namespace WpfAppTest.Data.Repositories.Interfaces.Common
         Task<Contact?> GetByIdAsync(int id);
 
         /// <summary>
+        /// Get a contact by firstname and lastname
+        /// </summary>
+        /// <param name="firstname">The searched contact firstname</param>
+        /// <param name="lastname">The searched contact lastname</param>
+        /// <returns>The contact associated to firstname and lastname or null if not found</returns>
+        Task<Contact?> GetByFirstnameAndLastnameAsync(string firstname, string lastname);
+
+        /// <summary>
         /// Get all contacts
         /// </summary>
         /// <returns>A contact list</returns>
