@@ -1,0 +1,26 @@
+﻿<UserControl x:Class="WpfAppTest.UI.Views.ContactDetailView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Prénom" Grid.Row="0" Grid.Column="1" Margin="0,5"/>
+        <TextBox Text="{Binding Contact.Firstname, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="2" Margin="0,5" VerticalContentAlignment="Center"/>
+
+        <Label Content="Nom" Grid.Row="1" Grid.Column="1" Margin="0,5"/>
+        <TextBox Text="{Binding Contact.Lastname, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="2" Margin="0,5" VerticalContentAlignment="Center"/>
+
+        <Button Content="Valider" Command="{Binding SaveCommand}" Grid.ColumnSpan="4" Grid.Row="2"/>
+    </Grid>
+</UserControl>

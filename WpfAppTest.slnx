@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="WpfAppTest.Core/WpfAppTest.Core.csproj" />
+  <Project Path="WpfAppTest.Data/WpfAppTest.Data.csproj" />
+  <Project Path="WpfAppTest.UI/WpfAppTest.UI.csproj" />
+</Solution>
