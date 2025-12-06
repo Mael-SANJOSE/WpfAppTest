@@ -38,3 +38,4 @@ app.publish/
 # Autre
 _ReSharper*/
 *.DotSettings.user
+/.vs
