@@ -1,0 +1,40 @@
+# Fichiers Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build / binaires
+bin/
+obj/
+Debug/
+Release/
+x64/
+x86/
+build/
+
+# Paquets NuGet
+*.nupkg
+*.snupkg
+packages/
+*.nupkg
+
+# Logs
+*.log
+
+# Fichiers d'analyse et cache
+*.cache
+*.pdb
+
+# Pub
+publish/
+app.publish/
+
+# Rider / VSCode (optionnel)
+.idea/
+.vscode/
+
+# Autre
+_ReSharper*/
+*.DotSettings.user
