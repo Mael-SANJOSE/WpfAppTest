@@ -3,6 +3,7 @@ using System.Reflection.Metadata;
 using System.Windows.Input;
 using WpfAppTest.Core.FunctionalServices.Interfaces;
 using WpfAppTest.Core.Models;
+using WpfAppTest.UI.Enums;
 using WpfAppTest.UI.Messages;
 using WpfAppTest.UI.Services.Interfaces;
 using WpfAppTest.UI.ViewModels.Interfaces;
@@ -15,6 +16,7 @@ namespace WpfAppTest.UI.ViewModels.ViewModels
         private readonly INavigationService _navigationService;
         private readonly IMessenger _messenger;
 
+        private ScreenMode ScreenMode { get; set; }
         public ICommand SaveCommand { get; }
 
         public ContactDetailViewModel(
@@ -31,7 +33,7 @@ namespace WpfAppTest.UI.ViewModels.ViewModels
 
         private async void Save()
         {
-            if (Contact.Firstname.IsNullOrEmpty())
+            if (ScreenMode == ScreenMode.Creation)
                 await _contactService.CreateAsync(Contact);
             else
                 await _contactService.Update(Contact);
@@ -42,19 +44,30 @@ namespace WpfAppTest.UI.ViewModels.ViewModels
             NavigateBack();
         }
 
-        public void OnNavigatedTo(object parameter)
+        public void OnNavigatedTo(params object[] parameters)
         {
-            if (parameter is Contact contact)
+            if (parameters.Length > 0 && parameters[0] is ScreenMode)
+                ScreenMode = (ScreenMode)parameters[0];
+
+            switch (ScreenMode)
             {
-                // Mode édition
-                Contact = contact;
-                Title = $"Modifier {contact.FullName}";
-            }
-            else
-            {
-                // Mode création
-                Contact = new Contact();
-                Title = "Nouveau contact";
+                case ScreenMode.Modification:
+                    Contact contact = (Contact)parameters[1];
+
+                    // Mode édition
+                    Contact = contact;
+                    Title = $"Modifier {contact.FullName}"; 
+                    
+                    break;
+
+                default :
+                    // Mode création
+                    Contact = new Contact();
+                    Title = "Nouveau contact";
+
+                    break;
+
+
             }
         }
 

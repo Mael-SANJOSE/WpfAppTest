@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using WpfAppTest.Core.FunctionalServices.Interfaces;
 using WpfAppTest.Core.Models;
+using WpfAppTest.UI.Enums;
 using WpfAppTest.UI.Messages;
 using WpfAppTest.UI.Services.Interfaces;
 
@@ -64,14 +65,14 @@ namespace WpfAppTest.UI.ViewModels.ViewModels
 
         private void AddContact()
         {
-            _navigationService.NavigateTo<ContactDetailViewModel>(null);
+            _navigationService.NavigateTo<ContactDetailViewModel>(ScreenMode.Creation);
         }
 
         private void EditContact(Contact contact)
         {
             if (contact != null)
             {
-                _navigationService.NavigateTo<ContactDetailViewModel>(contact);
+                _navigationService.NavigateTo<ContactDetailViewModel>(ScreenMode.Modification, contact);
             }
         }
 
