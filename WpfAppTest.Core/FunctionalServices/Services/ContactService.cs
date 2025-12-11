@@ -20,7 +20,7 @@ namespace WpfAppTest.Core.FunctionalServices.Services
         /// <returns></returns>
         public async Task CreateAsync(Contact contact)
         {
-            await _repository.CreateAsync(new Data.Entities.Common.Contact() { Firstname = contact.Firstname, Lastname = contact.Lastname });
+            await _repository.CreateAsync(new Data.Entities.Common.Contact() { Id = contact.Id, Firstname = contact.Firstname, Lastname = contact.Lastname });
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace WpfAppTest.Core.FunctionalServices.Services
             Data.Entities.Common.Contact? entityContact = await _repository.GetByIdAsync(id);
 
             if (entityContact != null)
-                contact = new() { Firstname = entityContact.Firstname, Lastname = entityContact.Lastname };
+                contact = new() { Id = entityContact.Id, Firstname = entityContact.Firstname, Lastname = entityContact.Lastname };
 
             return contact;
         }
@@ -48,7 +48,7 @@ namespace WpfAppTest.Core.FunctionalServices.Services
         {
             List<Data.Entities.Common.Contact> contacts = await _repository.GetAllAsync();
 
-            return contacts.Select(c => new Contact { Firstname = c.Firstname, Lastname = c.Lastname }).ToList();
+            return contacts.Select(c => new Contact { Id = c.Id, Firstname = c.Firstname, Lastname = c.Lastname }).ToList();
         }
 
         /// <summary>
@@ -58,9 +58,15 @@ namespace WpfAppTest.Core.FunctionalServices.Services
         /// <returns></returns>
         public async Task Update(Contact contact)
         {
-            Data.Entities.Common.Contact entityContact = new() { Firstname = contact.Firstname, Lastname = contact.Lastname };
+            Data.Entities.Common.Contact? entityContact = await _repository.GetByIdAsync(contact.Id);
 
-            await _repository.Update(entityContact);
+            if (entityContact != null)
+            {
+                entityContact.Firstname = contact.Firstname;
+                entityContact.Lastname = contact.Lastname;
+
+                await _repository.Update(entityContact);
+            }
         }
 
         /// <summary>
@@ -70,7 +76,7 @@ namespace WpfAppTest.Core.FunctionalServices.Services
         /// <returns></returns>
         public async Task Delete(Contact contact)
         {
-            Data.Entities.Common.Contact? entityContact = (await _repository.GetAllAsync()).FirstOrDefault(c => c.Firstname == contact.Firstname && c.Lastname == contact.Lastname);
+            Data.Entities.Common.Contact? entityContact = await _repository.GetByIdAsync(contact.Id);
 
             if (entityContact != null)
                 await _repository.Delete(entityContact);

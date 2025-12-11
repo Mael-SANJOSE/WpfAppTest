@@ -1,8 +1,10 @@
 ﻿namespace WpfAppTest.Core.Models
 {
     public class Contact : ModelBase
-    {
-        private string _firstname = "Prénom";
+    {        
+        public int Id { get; set; }
+
+        private string _firstname = "Veuillez saisir un prénom";
         public string Firstname
         {
             get => _firstname;
@@ -14,7 +16,7 @@
             }
         }
 
-        private string _lastname = "Nom";
+        private string _lastname = "Veuillez saisir un nom";
         public string Lastname
         {
             get => _lastname;
