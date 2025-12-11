@@ -43,6 +43,17 @@ namespace WpfAppTest.Data.Repositories.Services.Common
         }
 
         /// <summary>
+        /// Get a contact by firstname and lastname
+        /// </summary>
+        /// <param name="firstname">The searched contact firstname</param>
+        /// <param name="lastname">The searched contact lastname</param>
+        /// <returns>The contact associated to firstname and lastname or null if not found</returns>
+        public async Task<Contact?> GetByFirstnameAndLastnameAsync(string firstname, string lastname)
+        {
+            return await _context.Contacts.FirstOrDefaultAsync(c => c.Firstname == firstname && c.Lastname == lastname);
+        }
+
+        /// <summary>
         /// Get all contacts
         /// </summary>
         /// <returns>A contact list</returns>
@@ -73,7 +84,7 @@ namespace WpfAppTest.Data.Repositories.Services.Common
             _context.Contacts.Remove(contact);
 
             await _context.SaveChangesAsync();
-        }        
+        }       
         #endregion CRUD methods
     }
 }

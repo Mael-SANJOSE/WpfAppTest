@@ -6,7 +6,7 @@ namespace WpfAppTest.UI.Services.Interfaces
     {
         ViewModelBase CurrentView { get; }
         void NavigateTo<TViewModel>() where TViewModel : ViewModelBase;
-        void NavigateTo<TViewModel>(object parameter) where TViewModel : ViewModelBase;
+        void NavigateTo<TViewModel>(params object[] parameters) where TViewModel : ViewModelBase;
         event Action CurrentViewChanged;
     }
 }

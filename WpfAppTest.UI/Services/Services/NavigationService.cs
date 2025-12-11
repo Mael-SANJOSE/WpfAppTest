@@ -33,14 +33,14 @@ namespace WpfAppTest.UI.Services.Services
             CurrentView = viewModel;
         }
 
-        public void NavigateTo<TViewModel>(object parameter) where TViewModel : ViewModelBase
+        public void NavigateTo<TViewModel>(params object[] parameters) where TViewModel : ViewModelBase
         {
             var viewModel = _serviceProvider.GetRequiredService<TViewModel>();
 
             // Passer le paramètre si le ViewModel implémente INavigable
             if (viewModel is INavigable navigable)
             {
-                navigable.OnNavigatedTo(parameter);
+                navigable.OnNavigatedTo(parameters);
             }
 
             CurrentView = viewModel;
