@@ -14,7 +14,7 @@ namespace WpfAppTest.UI.ViewModels.ViewModels
     {
         private readonly IContactService _contactService;
         private readonly INavigationService _navigationService;
-        private readonly IMessenger _messenger;
+        private readonly IMessengerService _messenger;
 
         private ScreenMode ScreenMode { get; set; }
         public ICommand SaveCommand { get; }
@@ -22,7 +22,7 @@ namespace WpfAppTest.UI.ViewModels.ViewModels
         public ContactDetailViewModel(
             IContactService contactService,
             INavigationService navigationService,
-            IMessenger messenger)
+            IMessengerService messenger)
         {
             _contactService = contactService;
             _navigationService = navigationService;

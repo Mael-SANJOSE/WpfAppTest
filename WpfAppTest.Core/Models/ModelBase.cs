@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace WpfAppTest.Core.Models
 {
-    public class ModelBase : INotifyPropertyChanged
+    public abstract class ModelBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

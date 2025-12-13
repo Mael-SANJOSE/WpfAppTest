@@ -6,6 +6,7 @@ using WpfAppTest.Core.Models;
 using WpfAppTest.UI.Enums;
 using WpfAppTest.UI.Messages;
 using WpfAppTest.UI.Services.Interfaces;
+using WpfAppTest.UI.Services.Services;
 
 namespace WpfAppTest.UI.ViewModels.ViewModels
 {
@@ -13,7 +14,8 @@ namespace WpfAppTest.UI.ViewModels.ViewModels
     {
         private readonly IContactService _contactService;
         private readonly INavigationService _navigationService;
-        private readonly IMessenger _messenger;
+        private readonly IMessengerService _messenger;
+        private readonly IDialogService _dialogService;
         private Contact _selectedContact;
 
         public ObservableCollection<Contact> Contacts { get; set; }
@@ -31,21 +33,25 @@ namespace WpfAppTest.UI.ViewModels.ViewModels
         public ICommand AddContactCommand { get; }
         public ICommand EditContactCommand { get; }
         public ICommand DeleteContactCommand { get; }
+        public ICommand OpenMessageBoxCommand { get; }
 
         public ContactListViewModel(
             IContactService contactService,
             INavigationService navigationService,
-            IMessenger messenger)
+            IMessengerService messenger,
+            IDialogService dialogService)
         {
             _contactService = contactService;
             _navigationService = navigationService;
             _messenger = messenger;
+            _dialogService = dialogService;
 
             Contacts = new ObservableCollection<Contact>();
 
             AddContactCommand = new RelayCommand(AddContact);
             EditContactCommand = new RelayCommand<Contact>(EditContact);
             DeleteContactCommand = new RelayCommand<Contact>(DeleteContact);
+            OpenMessageBoxCommand = new RelayCommand(OpenMessageBox);
 
             // S'abonner aux messages
             _messenger.Register<ContactSavedMessage>(this, OnContactSaved);
@@ -92,6 +98,12 @@ namespace WpfAppTest.UI.ViewModels.ViewModels
                     Contacts.Remove(contact);
                 }
             }
+        }
+
+        private void OpenMessageBox()
+        {
+            DialogViewModel dialogViewModel = new DialogViewModel("Test titre", _dialogService);
+            _dialogService.ShowDialog(dialogViewModel);
         }
 
         private void OnContactSaved(ContactSavedMessage message)

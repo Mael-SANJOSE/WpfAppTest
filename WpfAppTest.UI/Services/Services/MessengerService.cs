@@ -2,7 +2,7 @@
 
 namespace WpfAppTest.UI.Services.Services
 {
-    public class Messenger : IMessenger
+    public class MessengerService : IMessengerService
     {
         private readonly Dictionary<Type, List<WeakReference>> _subscribers = new();
 

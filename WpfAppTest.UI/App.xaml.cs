@@ -9,6 +9,7 @@ using WpfAppTest.Data.Repositories.Services.Common;
 using WpfAppTest.UI.Services.Interfaces;
 using WpfAppTest.UI.Services.Services;
 using WpfAppTest.UI.ViewModels.ViewModels;
+using WpfAppTest.UI.Views;
 
 namespace WpfAppTest.UI
 {
@@ -34,9 +35,10 @@ namespace WpfAppTest.UI
             services.AddDbContext<ContactsContext>(options => options.UseSqlServer(@"Server=ZEPHYR\SQLSERVERMSJ;Database=CONTACTS;Trusted_Connection=True;Encrypt=False;"));
             #endregion EntityFrameworkService
 
-            // Enregistrement des services de navigation et messagerie
+            // Enregistrement des services de navigation, messagerie et dialogue
             services.AddSingleton<INavigationService, NavigationService>();
-            services.AddSingleton<IMessenger, Messenger>();
+            services.AddSingleton<IMessengerService, MessengerService>();
+            services.AddSingleton<IDialogService, DialogService>();
 
             // Enregistrement des repositories
             services.AddScoped<IContactRepository, ContactRepository>();
@@ -50,8 +52,11 @@ namespace WpfAppTest.UI
             services.AddTransient<ContactListViewModel>();
             services.AddTransient<ContactDetailViewModel>();
 
+            services.AddTransient<DialogViewModel>();
+
             // Enregistrement des Views
             services.AddTransient<MainWindow>();
+            services.AddTransient<DialogView>();
         }
 
         protected override async void OnStartup(StartupEventArgs e)
