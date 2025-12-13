@@ -102,7 +102,7 @@ namespace WpfAppTest.UI.ViewModels.ViewModels
 
         private void OpenMessageBox()
         {
-            DialogViewModel dialogViewModel = new DialogViewModel("Test titre", _dialogService);
+            ConfirmationViewModel dialogViewModel = new ConfirmationViewModel("Test titre", _dialogService);
             _dialogService.ShowDialog(dialogViewModel);
         }
 

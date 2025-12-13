@@ -3,12 +3,12 @@ using WpfAppTest.UI.Services.Interfaces;
 
 namespace WpfAppTest.UI.ViewModels.ViewModels
 {
-    public class DialogViewModel : ViewModelBase
+    public class ConfirmationViewModel : ViewModelBase
     {
         private readonly IDialogService _dialogService;
         public ICommand OkCommand { get; }
 
-        public DialogViewModel(string title, IDialogService dialogService)
+        public ConfirmationViewModel(string title, IDialogService dialogService)
         {
             _title = title;
             _dialogService = dialogService;
