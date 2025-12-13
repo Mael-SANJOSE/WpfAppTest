@@ -52,7 +52,7 @@ namespace WpfAppTest.UI
             services.AddTransient<ContactListViewModel>();
             services.AddTransient<ContactDetailViewModel>();
 
-            services.AddTransient<DialogViewModel>();
+            services.AddTransient<ConfirmationViewModel>();
 
             // Enregistrement des Views
             services.AddTransient<MainWindow>();

@@ -17,7 +17,7 @@ namespace WpfAppTest.UI.Services.Services
         public DialogService()
         {
             // Enregistrer les associations ViewModel -> View
-            RegisterDialog<DialogViewModel, DialogView>();
+            RegisterDialog<ConfirmationViewModel, DialogView>();
             //RegisterDialog<CustomConfirmViewModel, CustomConfirmDialog>();
             //RegisterDialog<ProgressDialogViewModel, ProgressDialog>();
         }
